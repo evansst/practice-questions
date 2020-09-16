@@ -2,28 +2,30 @@ const setUnique = (array) => {
   let returnArray = []
 
   for(const element of array) {
-    returnArray = callback(returnArray, element)
+    returnArray.includes(element)
+      ? returnArray.push(element)
+      : unique(returnArray, element)
   }
 
   return returnArray
 }
 
-const callback = (returnArray, element, i = 1) => {
-  if(returnArray.includes(element)) {
-    if(returnArray.includes(`${element}${i}`)) {
-      callback(returnArray, element , i + 1)
-    } else {
-      returnArray.push(`${element}${i}`)
-    }
-  } else {
-    returnArray.push(element)
-  }
+const unique = (returnArray, element, i = 1) => {
+  returnArray.includes(element + i) 
+    ? unique(returnArray, element , i + 1)
+    : returnArray.push(element + i)
 
   return returnArray
 }
 
 
 array = [
+  "apple",
+  "banana",
+  "apple",
+  "banana",
+  "apple",
+  "banana",
   "apple",
   "banana",
   "apple",
